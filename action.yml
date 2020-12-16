@@ -1,7 +1,19 @@
-name: 'Randcom Social Sharer'
+name: 'Random Social Sharer'
 author: 'JoeHx'
 description: 'Share a random (blog) page to your social media accounts.'
 inputs:
+  twitter_access_token:
+    description: 'Twitter access token'
+    required: false
+  twitter_access_token_secret:
+    description: 'Twitter access token secret'
+    required: false
+  twitter_consumer_key:
+    description: 'Twitter consumer key'
+    required: false
+  twitter_consumer_secret:
+    description: 'Twitter consumer key secret'
+    required: false
   source:
     description: 'URL of the list of posts.'
     required: true
