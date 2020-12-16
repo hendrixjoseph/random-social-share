@@ -6,6 +6,7 @@
   "dependencies": {
     "@actions/core": "^1.2.4",
     "csv-parse": "^4.14.1",
+    "fb": "^2.0.0",
     "node-fetch": "^2.6.0",
     "twitter": "^1.7.1"
   },
