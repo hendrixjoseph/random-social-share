@@ -30,8 +30,8 @@ let tweet = content => {
         
         core.info(`Tweet available at https://twitter.com/${tweet.user.screen_name}/status/${tweet.id}`)
         core.info(`2Tweet available at ${tweet.entities.urls.expanded_url}`)
-        core.info(`Full response:`
-        core.info(`JSON.stringify(tweet))
+        core.info(`Full response:`)
+        core.info(JSON.stringify(tweet))
     }).catch(error => {
         core.info(JSON.stringify(error))
     })
