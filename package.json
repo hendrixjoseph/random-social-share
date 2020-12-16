@@ -1,0 +1,21 @@
+{
+  "name": "random-social-share",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "@actions/core": "^1.2.4",
+    "csv-parse": "^4.14.1",
+    "node-fetch": "^2.6.0",
+    "twitter": "^1.7.1"
+  },
+  "devDependencies": {
+    "jest": "^20.0.4",
+    "standard": "^10.0.2"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "JoeHx",
+  "license": "ISC"
+}
