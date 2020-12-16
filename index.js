@@ -6,10 +6,10 @@ const fetch = require('node-fetch')
 const parse = require("csv-parse")
 
 let tweet = content => {
-  const consumer_key = core.getInput('twitter_consumer_key')
-  const consumer_secret = core.getInput('twitter_consumer_secret');
-  const access_token_key = core.getInput('twitter_access_token')
-  const access_token_secret = core.getInput('twitter_access_token_secret');
+  const consumer_key = ${{ secrets.TWITTER_CONSUMER_KEY }}
+  const consumer_secret = ${{ secrets.TWITTER_CONSUMER_SECRET }}
+  const access_token_key = ${{ secrets.TWITTER_ACCESS_TOKEN }}
+  const access_token_secret = ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
 
   core.setSecret(consumer_key);
   core.setSecret(consumer_secret);
