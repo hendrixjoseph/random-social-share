@@ -28,8 +28,7 @@ let tweet = content => {
   client.post('statuses/update', {status: content})
     .then(tweet => {
         
-        core.info(`Tweet available at https://twitter.com/${tweet.user.screen_name}/status/${tweet.id}`)
-        core.info(`2Tweet available at ${tweet.entities.urls.expanded_url}`)
+        core.info(`Tweet available at https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`)
         core.info(`Full response:`)
         core.info(JSON.stringify(tweet))
     }).catch(error => {
