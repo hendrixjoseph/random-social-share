@@ -36,6 +36,8 @@ let tweet = content => {
         }).catch(error => {
             core.info(JSON.stringify(error))
         })
+    } else {
+        core.info("Twitter variables not set; not tweeting.")
     }
 }
 
@@ -59,18 +61,31 @@ const share = (message, link) => {
                 core.info(JSON.stringify(response))
             }
             )
+    } else {
+        core.info("Facebook variables not set; not sharing.")
     }
 }
 
 const source = core.getInput('source')
 
-fetch(source)
-    .then(res => res.text())
-    .then(text => parse(text, {columns: true, escape: '\\'}, (err, posts) => {
-        let index = Math.floor(Math.random() * posts.length)
-        let post = posts[index]
-        let content = `Classic post from ${post.date}: ${post.title}`
+if (source.endsWith('csv')) {
+    fetch(source)
+        .then(res => res.text())
+        .then(text => parse(text, {columns: true, escape: '\\'}, (err, posts) => {
+            let index = Math.floor(Math.random() * posts.length)
+            let post = posts[index]
+            let content = `Classic post from ${post.date}: ${post.title}`
 
-        tweet(content + ' ' + post.url)
-        share(content, post.url)
-    }))
+            tweet(content + ' ' + post.url)
+            share(content, post.url)
+        }))
+} else {
+    const Parser = require("rss-parser")
+    let parser = new Parser();
+    parser.parseURL('https://news.puppy-snuggles.com/feed')
+          .then(feed => feed.items[0])
+          .then(item => {
+                tweet(item.title + ' ' + post.url)
+                share(item.title, item.link)
+          })
+}
