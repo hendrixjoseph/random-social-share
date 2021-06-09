@@ -48,8 +48,13 @@ const share = (message, link) => {
   if (access_token) {
     core.setSecret(access_token)
 
-    FB.setAccessToken(access_token);
-    FB.api('/me/feed',
+    let precache = 'https://developers.facebook.com/tools/debug/?q=' + encodeURIComponent(link)
+    core.info('precaching at ' + precache)
+    
+    fetch(precache)
+      .then(() => {
+        FB.setAccessToken(access_token)
+        FB.api('/me/feed',
             'POST',
             { 'message': message, 'link': link},
             response => {
@@ -60,7 +65,8 @@ const share = (message, link) => {
                 }
                 core.info(JSON.stringify(response))
             }
-            )
+          )}
+        )
     } else {
         core.info("Facebook variables not set; not sharing.")
     }
