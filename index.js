@@ -16,24 +16,27 @@ let tweet = content => {
   core.setSecret(access_token_key)
   core.setSecret(access_token_secret)
 
-  let Twitter = require('twitter')
+  if (consumer_key && consumer_secret && access_token_key && access_token_secret) {
 
-  let client = new Twitter({
-    consumer_key: consumer_key,
-    consumer_secret: consumer_secret,
-    access_token_key: access_token_key,
-    access_token_secret: access_token_secret
-  })
+    let Twitter = require('twitter')
 
-  client.post('statuses/update', {status: content})
-    .then(tweet => {
-
-        core.info(`Tweet available at https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`)
-        core.info(`Full response:`)
-        core.info(JSON.stringify(tweet))
-    }).catch(error => {
-        core.info(JSON.stringify(error))
+    let client = new Twitter({
+        consumer_key: consumer_key,
+        consumer_secret: consumer_secret,
+        access_token_key: access_token_key,
+        access_token_secret: access_token_secret
     })
+
+    client.post('statuses/update', {status: content})
+        .then(tweet => {
+
+            core.info(`Tweet available at https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`)
+            core.info(`Full response:`)
+            core.info(JSON.stringify(tweet))
+        }).catch(error => {
+            core.info(JSON.stringify(error))
+        })
+    }
 }
 
 const share = (message, link) => {
@@ -42,19 +45,21 @@ const share = (message, link) => {
   const access_token = core.getInput('facebook_access_token')
   core.setSecret(access_token)
 
-  FB.setAccessToken(access_token);
-  FB.api('/me/feed',
-         'POST',
-        { 'message': message, 'link': link},
-        response => {
-            if (response.error) {
-                core.info('error occurred')
-            } else {
-                core.info('successfully posted to page!')
+  if (access_token) {
+    FB.setAccessToken(access_token);
+    FB.api('/me/feed',
+            'POST',
+            { 'message': message, 'link': link},
+            response => {
+                if (response.error) {
+                    core.info('error occurred')
+                } else {
+                    core.info('successfully posted to page!')
+                }
+                core.info(JSON.stringify(response))
             }
-            core.info(JSON.stringify(response))
-        }
-        )
+            )
+    }
 }
 
 const source = core.getInput('source')
