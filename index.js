@@ -11,12 +11,11 @@ let tweet = content => {
   const access_token_key = core.getInput('twitter_access_token')
   const access_token_secret = core.getInput('twitter_access_token_secret')
 
-  core.setSecret(consumer_key)
-  core.setSecret(consumer_secret)
-  core.setSecret(access_token_key)
-  core.setSecret(access_token_secret)
-
   if (consumer_key && consumer_secret && access_token_key && access_token_secret) {
+    core.setSecret(consumer_key)
+    core.setSecret(consumer_secret)
+    core.setSecret(access_token_key)
+    core.setSecret(access_token_secret)
 
     let Twitter = require('twitter')
 
@@ -45,9 +44,10 @@ const share = (message, link) => {
   const FB = require('fb');
 
   const access_token = core.getInput('facebook_access_token')
-  core.setSecret(access_token)
 
   if (access_token) {
+    core.setSecret(access_token)
+
     FB.setAccessToken(access_token);
     FB.api('/me/feed',
             'POST',
