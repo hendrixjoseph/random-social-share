@@ -85,7 +85,7 @@ if (source.endsWith('csv')) {
     parser.parseURL('https://news.puppy-snuggles.com/feed')
           .then(feed => feed.items[0])
           .then(item => {
-                tweet(item.title + ' ' + post.url)
+                tweet(item.title + ' ' + item.link)
                 share(item.title, item.link)
           })
 }
